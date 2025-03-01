@@ -3,16 +3,25 @@ package com.wm38.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity //Mapeia essa classe para usar o JPA
+@Table(name = "tb_user") //Troca o nome da class, pois o User é uma palavra reservada
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id //Informa que é a chave primaria
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Informa que é auto-increment 
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
-	
 	
 	public User() {
 	}
