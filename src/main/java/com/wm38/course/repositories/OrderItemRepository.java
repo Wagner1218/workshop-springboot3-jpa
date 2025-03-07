@@ -7,6 +7,5 @@ import com.wm38.course.entities.OrderItem;
 
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 
-	
-	
+		
 }
