@@ -25,4 +25,8 @@ public class UserSerice {
 		return obj.get();
 	}
 	
+	public User insert(User obj) {
+		return repository.save(obj);
+	}
+	
 }
