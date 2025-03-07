@@ -34,8 +34,12 @@ public class UserSerice {
 	}
 
 	public void delete(Long id) {
-
+		 
 		try {
+			if (!repository.existsById(id)) {
+		        System.out.println("Erro: Usuário não encontrado!");
+		        throw new ResourceNotFoundException(id);
+		    }
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
