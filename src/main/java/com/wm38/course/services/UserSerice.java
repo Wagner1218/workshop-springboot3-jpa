@@ -13,6 +13,8 @@ import com.wm38.course.repositories.UserRepository;
 import com.wm38.course.resources.exceptions.DatabaseException;
 import com.wm38.course.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserSerice {
 
@@ -34,7 +36,6 @@ public class UserSerice {
 	}
 
 	public void delete(Long id) {
-		 
 		try {
 			if (!repository.existsById(id)) {
 		        System.out.println("Erro: Usuário não encontrado!");
@@ -49,9 +50,16 @@ public class UserSerice {
 	}
 
 	public User update(Long id, User obj) {
-		User entity = repository.getReferenceById(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		
+		try {
+		
+			User entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		}catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
 	}
 
 	private void updateData(User entity, User obj) {
